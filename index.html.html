@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>растяпа.нет — Твоя безопасность в сети</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0d1117;
+            color: #c9d1d9;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 9999;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        nav {
+            background: rgba(13, 17, 23, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #21262d;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #58a6ff;
+            letter-spacing: -0.5px;
+        }
+
+        .brand span {
+            color: #ff7b72;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: #8b949e;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #58a6ff;
+        }
+
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem 3rem;
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #8b949e;
+            max-width: 650px;
+            margin-bottom: 2.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.85rem 1.8rem;
+            background: #238636;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: background 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #2ea043;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+        }
+
+        .btn-secondary:hover {
+            border-color: #8b949e;
+            background: rgba(139, 148, 158, 0.1);
+        }
+
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2.5rem;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+        .theory-grid {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .theory-block {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 2rem;
+            transition: border-color 0.2s;
+        }
+
+        .theory-block:hover {
+            border-color: #58a6ff;
+        }
+
+        .theory-block h3 {
+            font-size: 1.4rem;
+            color: #58a6ff;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .theory-block h4 {
+            font-size: 1.1rem;
+            color: #79c0ff;
+            margin: 1.5rem 0 0.8rem;
+            font-weight: 500;
+        }
+
+        .theory-block p {
+            color: #8b949e;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .theory-block ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .theory-block li {
+            color: #8b949e;
+            margin-bottom: 0.6rem;
+            line-height: 1.6;
+        }
+
+        .theory-block strong {
+            color: #c9d1d9;
+        }
+
+        .alert {
+            background: rgba(248, 81, 73, 0.1);
+            border-left: 3px solid #f85149;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .alert p {
+            color: #ffa198;
+            margin: 0;
+        }
+
+        .tip {
+            background: rgba(56, 139, 253, 0.1);
+            border-left: 3px solid #58a6ff;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .tip p {
+            color: #79c0ff;
+            margin: 0;
+        }
+
+        .threats-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .threat-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-left: 3px solid #ff7b72;
+            border-radius: 8px;
+            padding: 1.8rem;
+            transition: all 0.2s;
+        }
+
+        .threat-card:hover {
+            border-left-color: #ffa198;
+            transform: translateX(4px);
+        }
+
+        .threat-card h3 {
+            font-size: 1.2rem;
+            color: #ff7b72;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .threat-card p {
+            color: #8b949e;
+            line-height: 1.7;
+        }
+
+        .quiz-wrapper {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 2.5rem;
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+
+        .progress {
+            width: 100%;
+            height: 6px;
+            background: #21262d;
+            border-radius: 3px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #238636, #2ea043);
+            transition: width 0.4s;
+            border-radius: 3px;
+        }
+
+        .question-box {
+            display: none;
+        }
+
+        .question-box.active {
+            display: block;
+        }
+
+        .question-box h3 {
+            font-size: 1.3rem;
+            color: #c9d1d9;
+            margin-bottom: 1.8rem;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .answers {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .answer {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            padding: 1rem 1.3rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #8b949e;
+        }
+
+        .answer:hover {
+            border-color: #58a6ff;
+            background: rgba(56, 139, 253, 0.05);
+        }
+
+        .answer.selected {
+            border-color: #58a6ff;
+            background: rgba(56, 139, 253, 0.1);
+            color: #c9d1d9;
+        }
+
+        .answer.correct {
+            border-color: #238636;
+            background: rgba(35, 134, 54, 0.15);
+            color: #7ee787;
+        }
+
+        .answer.wrong {
+            border-color: #da3633;
+            background: rgba(248, 81, 73, 0.15);
+            color: #ffa198;
+        }
+
+        .quiz-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .results {
+            text-align: center;
+            display: none;
+        }
+
+        .results.show {
+            display: block;
+        }
+
+        .score {
+            font-size: 3.5rem;
+            color: #238636;
+            font-weight: 700;
+            margin: 1.5rem 0;
+        }
+
+        .results p {
+            font-size: 1.1rem;
+            color: #8b949e;
+            margin-bottom: 2rem;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .resource {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 1.8rem;
+            transition: all 0.2s;
+        }
+
+        .resource:hover {
+            border-color: #58a6ff;
+            transform: translateY(-2px);
+        }
+
+        .resource h3 {
+            font-size: 1.2rem;
+            color: #79c0ff;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .resource p {
+            color: #8b949e;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .resource a {
+            color: #58a6ff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .resource a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            border-top: 1px solid #21262d;
+            padding: 3rem 2rem;
+            text-align: center;
+            color: #8b949e;
+            font-size: 0.9rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+
+            .quiz-wrapper {
+                padding: 1.5rem;
+            }
+        }
+
+        .code-block {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            color: #79c0ff;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+
+        .highlight {
+            color: #ffa657;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="grain"></div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="brand">растяпа<span>.нет</span></div>
+            <ul>
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#theory">Теория</a></li>
+                <li><a href="#threats">Угрозы</a></li>
+                <li><a href="#quiz">Проверка</a></li>
+                <li><a href="#sources">Источники</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero" id="home">
+        <h1>Не будь растяпой в интернете</h1>
+        <p>Разберись, как работают мошенники, научись защищать свои данные и перестань попадаться на их уловки</p>
+        <a href="#theory" class="btn">Изучить материалы</a>
+    </div>
+
+    <section id="theory">
+        <h2>Базовые принципы безопасности</h2>
+
+        <div class="theory-grid">
+            <div class="theory-block">
+                <h3>Пароли и доступы</h3>
+                <p>Пароль — это первая линия защиты твоих аккаунтов. Но большинство людей используют слабые пароли, которые легко взломать.</p>
+                
+                <h4>Что делает пароль надёжным:</h4>
+                <ul>
+                    <li><strong>Длина минимум 12 символов</strong> — чем длиннее, тем сложнее подобрать</li>
+                    <li><strong>Разные типы символов</strong> — заглавные и строчные буквы, цифры, спецсимволы (!@#$%)</li>
+                    <li><strong>Отсутствие словарных слов</strong> — не используй имена, даты рождения, названия групп</li>
+                    <li><strong>Уникальность для каждого сайта</strong> — если один сайт взломают, остальные останутся в безопасности</li>
+                </ul>
+
+                <div class="alert">
+                    <p><strong>Никогда не используй:</strong> 123456, qwerty, password, свою дату рождения, имя питомца, название школы</p>
+                </div>
+
+                <h4>Менеджеры паролей</h4>
+                <p>Запомнить десятки сложных паролей невозможно. Поэтому существуют менеджеры паролей — программы, которые хранят все твои пароли в зашифрованном виде. Тебе нужно запомнить только один мастер-пароль.</p>
+                <p><strong>Популярные варианты:</strong> Bitwarden (бесплатный), 1Password, LastPass, встроенные менеджеры в браузерах Chrome и Safari</p>
+
+                <h4>Двухфакторная аутентификация (2FA)</h4>
+                <p>Это когда помимо пароля нужно ввести ещё один код подтверждения. Даже если мошенник узнает твой пароль, без второго фактора он не сможет войти в аккаунт.</p>
+                <p><strong>Виды 2FA:</strong></p>
+                <ul>
+                    <li>СМС-коды (самый простой, но не самый надёжный)</li>
+                    <li>Приложения-аутентификаторы (Google Authenticator, Authy) — безопаснее СМС</li>
+                    <li>Физические ключи (YubiKey) — максимальная защита</li>
+                </ul>
+
+                <div class="tip">
+                    <p><strong>Лайфхак:</strong> Для создания запоминающегося пароля можешь взять первые буквы слов из любимой фразы или песни и добавить цифры. Например, "Я учусь в 9 классе школы номер 15" → Яув9кшн15!</p>
+                </div>
+            </div>
+
+            <div class="theory-block">
+                <h3>Фишинг и социальная инженерия</h3>
+                <p>Фишинг — это когда мошенники притворяются представителями банков, соцсетей или других сервисов, чтобы выманить у тебя пароли, данные карты или деньги.</p>
+
+                <h4>Как работает фишинг:</h4>
+                <p>Тебе приходит письмо, СМС или сообщение в мессенджере якобы от ВКонтакте, банка, YouTube. В сообщении пишут, что срочно нужно подтвердить данные, иначе аккаунт заблокируют. Ты переходишь по ссылке и попадаешь на поддельный сайт, который выглядит как настоящий. Вводишь логин и пароль — и всё, мошенники получают доступ к твоему аккаунту.</p>
+
+                <h4>Признаки фишинга:</h4>
+                <ul>
+                    <li><strong>Подозрительный адрес отправителя</strong> — например, vk0ntakte.ru вместо vk.com</li>
+                    <li><strong>Срочность и угрозы</strong> — "Ваш аккаунт будет заблокирован через 24 часа!"</li>
+                    <li><strong>Грамматические ошибки</strong> — официальные компании проверяют тексты</li>
+                    <li><strong>Просьбы о конфиденциальной информации</strong> — банк никогда не спросит код из СМС</li>
+                    <li><strong>Слишком хорошие предложения</strong> — бесплатные iPhone, выигрыши в лотереях</li>
+                </ul>
+
+                <h4>Как проверить настоящий ли это сайт:</h4>
+                <ul>
+                    <li>Посмотри на адресную строку — должен быть https:// и значок замка</li>
+                    <li>Проверь точный адрес сайта — vk.com, а не vk-security.com</li>
+                    <li>Обрати внимание на детали — качество логотипа, оформление</li>
+                </ul>
+
+                <div class="alert">
+                    <p><strong>Золотое правило:</strong> Если сомневаешься — не переходи по ссылке. Открой браузер, вручную набери адрес сайта и войди оттуда.</p>
+                </div>
+
+                <h4>Социальная инженерия</h4>
+                <p>Это когда мошенники манипулируют тобой психологически, а не технически. Они могут:</p>
+                <ul>
+                    <li>Притворяться твоим другом, чтобы выманить информацию</li>
+                    <li>Использовать твои публичные данные из соцсетей для персонализации обмана</li>
+                    <li>Вызывать эмоции (страх, жадность, любопытство) для принятия необдуманных решений</li>
+                </ul>
+            </div>
+
+            <div class="theory-block">
+                <h3>Безопасность в соцсетях</h3>
+                <p>Соцсети — это место, где ты делишься своей жизнью. Но каждый пост может рассказать о тебе больше, чем ты думаешь.</p>
+
+                <h4>Что не стоит публиковать:</h4>
+                <ul>
+                    <li><strong>Точный адрес и место учёбы</strong> — достаточно города или района</li>
+                    <li><strong>Номер телефона и email</strong> — для связи используй личные сообщения</li>
+                    <li><strong>Когда ты в отпуске или один дома</strong> — сообщаешь потенциальным грабителям, что дома никого нет</li>
+                    <li><strong>Фотографии документов, билетов, карт</strong> — на них могут быть штрих-коды и персональные данные</li>
+                    <li><strong>Подробное расписание дня</strong> — мошенники могут узнать твои привычки и маршруты</li>
+                </ul>
+
+                <h4>Настройки приватности:</h4>
+                <p>В каждой соцсети есть настройки приватности. Обязательно:</p>
+                <ul>
+                    <li>Сделай профиль закрытым (только для друзей)</li>
+                    <li>Ограничь, кто может тебя найти по номеру телефона</li>
+                    <li>Запрети незнакомцам писать тебе в личку</li>
+                    <li>Отключи автоматическое определение геолокации на фото</li>
+                </ul>
+
+                <h4>Заявки в друзья от незнакомцев:</h4>
+                <p>Мошенники часто создают фейковые профили с украденными фотографиями. Признаки подозрительного профиля:</p>
+                <ul>
+                    <li>Мало друзей или все друзья тоже подозрительные</li>
+                    <li>Один-два красивых фото, но нет обычных бытовых</li>
+                    <li>Аккаунт создан недавно</li>
+                    <li>Странные сообщения сразу после добавления</li>
+                </ul>
+
+                <div class="tip">
+                    <p><strong>Регулярно проверяй:</strong> Кто видит твои посты, кто в друзьях, какие приложения имеют доступ к твоему аккаунту</p>
+                </div>
+            </div>
+
+            <div class="theory-block">
+                <h3>Безопасность мобильных устройств</h3>
+                <p>Твой смартфон содержит больше личной информации, чем любой компьютер. Если кто-то получит доступ к телефону, он получит доступ ко всей твоей жизни.</p>
+
+                <h4>Базовая защита смартфона:</h4>
+                <ul>
+                    <li><strong>Блокировка экрана</strong> — используй PIN из 6 цифр или биометрию</li>
+                    <li><strong>Автоматическое обновление системы</strong> — закрывает уязвимости</li>
+                    <li><strong>Установка приложений только из официальных магазинов</strong> — App Store или Google Play</li>
+                    <li><strong>Проверка разрешений приложений</strong> — зачем фонарику доступ к контактам?</li>
+                </ul>
+
+                <h4>Публичный Wi-Fi — зона риска:</h4>
+                <p>В кафе, торговых центрах, метро часто есть бесплатный Wi-Fi. Но на таких сетях:</p>
+                <ul>
+                    <li>Злоумышленники могут перехватывать твой трафик</li>
+                    <li>Фальшивые точки доступа с похожими названиями ("Starbucks_Free" вместо "Starbucks_WiFi")</li>
+                    <li>Автоматическое подключение к небезопасным сетям</li>
+                </ul>
+                <p><strong>Правило:</strong> В публичных Wi-Fi не заходи в банковские приложения и не вводи пароли. Используй мобильный интернет для важных операций.</p>
+
+                <h4>Что делать при потере телефона:</h4>
+                <ul>
+                    <li>Заблокируй СИМ-карту через оператора</li>
+                    <li>Используй функцию поиска устройства (Find My iPhone или Find My Device)</li>
+                    <li>Удалённо сотри данные, если телефон не найдётся</li>
+                    <li>Смени пароли от всех важных аккаунтов</li>
+                </ul>
+            </div>
+
+            <div class="theory-block">
+                <h3>Онлайн-платежи и покупки</h3>
+                <p>Покупки в интернете — удобно, но есть риски. Разбираемся, как не потерять деньги.</p>
+
+                <h4>Признаки безопасного сайта для покупок:</h4>
+                <ul>
+                    <li><strong>HTTPS и замок в адресной строке</strong> — данные передаются в зашифрованном виде</li>
+                    <li><strong>Читаемые отзывы</strong> — настоящие отзывы подробные, с плюсами и минусами</li>
+                    <li><strong>Контакты компании</strong> — адрес, телефон, email</li>
+                    <li><strong>Политика возврата</strong> — легальные магазины всегда прописывают условия</li>
+                </ul>
+
+                <h4>Оплата онлайн:</h4>
+                <p><strong>Безопасные способы:</strong></p>
+                <ul>
+                    <li>Виртуальные карты — создаются на одну покупку с лимитом</li>
+                    <li>Apple Pay, Google Pay — данные карты не передаются магазину</li>
+                    <li>Защищённые платёжные системы (PayPal, ЮMoney)</li>
+                </ul>
+
+                <div class="alert">
+                    <p><strong>Никогда не сообщай:</strong> CVV-код (3 цифры на обороте карты), код из СМС, полные данные карты в переписке</p>
+                </div>
+
+                <h4>Красные флаги мошеннических магазинов:</h4>
+                <ul>
+                    <li>Цены сильно ниже рыночных (iPhone за 5000 рублей)</li>
+                    <li>Требуют 100% предоплату без гарантий</li>
+                    <li>Давят на скорость решения ("Осталось 2 штуки!")</li>
+                    <li>Неграмотные тексты на сайте</li>
+                    <li>Отсутствие в поисковиках или только негативные отзывы</li>
+                </ul>
+
+                <h4>Что делать, если обманули:</h4>
+                <ul>
+                    <li>Сразу свяжись с банком — они могут отменить платёж</li>
+                    <li>Сохрани все переписки и чеки</li>
+                    <li>Напиши жалобу на сайт Роспотребнадзора</li>
+                    <li>Обратись в полицию с заявлением о мошенничестве</li>
+                </ul>
+            </div>
+
+            <div class="theory-block">
+                <h3>Персональные данные и цифровой след</h3>
+                <p>Всё, что ты делаешь в интернете, оставляет след. Эту информацию собирают компании, рекламодатели и мошенники.</p>
+
+                <h4>Что такое персональные данные:</h4>
+                <ul>
+                    <li>ФИО, дата и место рождения</li>
+                    <li>Адрес проживания и регистрации</li>
+                    <li>Номер телефона и email</li>
+                    <li>Данные паспорта, СНИЛС, ИНН</li>
+                    <li>Фотографии и видео</li>
+                    <li>История поисковых запросов и покупок</li>
+                </ul>
+
+                <h4>Как защитить свои данные:</h4>
+                <ul>
+                    <li><strong>Минимизация</strong> — не давай информацию, если она не обязательна</li>
+                    <li><strong>Разные email для разных целей</strong> — один для соцсетей, другой для банка</li>
+                    <li><strong>Виртуальные номера</strong> — для регистраций используй временные номера</li>
+                    <li><strong>Очистка цифрового следа</strong> — регулярно удаляй старые аккаунты</li>
+                </ul>
+
+                <h4>Файлы cookie и отслеживание:</h4>
+                <p>Сайты сохраняют информацию о твоих действиях через cookies. Это помогает показывать релевантную рекламу, но также позволяет следить за тобой в интернете.</p>
+                <p><strong>Что можно сделать:</strong></p>
+                <ul>
+                    <li>Регулярно очищай cookies в браузере</li>
+                    <li>Используй режим инкогнито для приватного просмотра</li>
+                    <li>Установи блокировщики рекламы и трекеров (uBlock Origin)</li>
+                </ul>
+
+                <div class="tip">
+                    <p><strong>Проверь себя:</strong> Введи своё имя в Google и посмотри, какая информация о тебе доступна публично. Удали то, что не хочешь показывать</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="threats">
+        <h2>Актуальные схемы мошенничества</h2>
+
+        <div class="threats-list">
+            <div class="threat-card">
+                <h3>Звонки от "службы безопасности банка"</h3>
+                <p>Мошенники представляются сотрудниками банка и говорят, что кто-то пытается снять деньги с твоего счёта или оформить кредит на твоё имя. Они создают панику и просят срочно "защитить" деньги: перевести на "безопасный счёт" или сообщить код из СМС.</p>
+                <p><strong>Как защититься:</strong> Настоящий банк НИКОГДА не запрашивает код из СМС, данные карты или пароли. Положи трубку и сам перезвони в банк по номеру с официального сайта или карты.</p>
+            </div>
+
+            <div class="threat-card">
+                <h3>Фейковые раздачи и розыгрыши в играх</h3>
+                <p>В социальных сетях появляются посты о розыгрышах дорогих скинов, доната или игровой валюты. Для участия нужно перейти по ссылке и авторизоваться через Steam, Roblox или другой игровой аккаунт. Сайт выглядит как официальный, но это копия — после входа мошенники получают доступ к твоему аккаунту и забирают всё ценное.</p>
+                <p><strong>Как защититься:</strong> Проверяй адрес сайта (должен быть steampowered.com, а не steamcommunity-prizes.com). Настоящие разработчики никогда не просят логин и пароль для участия в конкурсе.</p>
+            </div>
+
+            <div class="threat-card">
+                <h3>Фишинговые письма с угрозами блокировки</h3>
+                <p>Приходит письмо от "ВКонтакте", "YouTube" или "Netflix" с сообщением, что твой аккаунт будет заблокирован из-за нарушения правил или неоплаченной подписки. В письме есть кнопка "Подтвердить данные" или "Оплатить сейчас", которая ведёт на фальшивый сайт.</p>
+                <p><strong>Как защититься:</strong> Смотри на адрес отправителя — если это не официальный домен компании (например, vk@security-vk.ru вместо vk.com), это подделка. Не переходи по ссылкам из писем — заходи на сайт напрямую через закладки.</p>
+            </div>
+
+            <div class="threat-card">
+                <h3>Взлом аккаунта друга с просьбой о деньгах</h3>
+                <p>Мошенники взламывают аккаунт твоего друга (или создают поддельный профиль) и пишут тебе с просьбой срочно занять денег. Придумывают убедительную историю: потерял телефон, украли карту, нужно срочно оплатить что-то важное.</p>
+                <p><strong>Как защититься:</strong> Всегда проверяй через голосовой звонок или другой мессенджер — действительно ли это твой друг. Настоящие друзья поймут, если ты захочешь убедиться. Если человек отказывается созвониться — это мошенник.</p>
+            </div>
+
+            <div class="threat-card">
+                <h3>Поддельные промокоды и подарочные карты</h3>
+                <p>Тебе предлагают активировать промокод на большую сумму для iTunes, Steam, Google Play. Но для активации нужно сначала оплатить "комиссию" или "проверочный платёж". После оплаты мошенники пропадают, а промокода не существовало.</p>
+                <p><strong>Как защититься:</strong> Официальные сервисы никогда не требуют предоплату за активацию промокода. Если предложение пришло от незнакомца — это 100% обман.</p>
+            </div>
+
+            <div class="threat-card">
+                <h3>Шантаж и вымогательство в соцсетях</h3>
+                <p>Незнакомый человек начинает дружескую переписку, выманивает личные фото или видео, а потом угрожает опубликовать их, если не переведёшь деньги. Могут также взломать твой аккаунт и угрожать опубликовать переписки или удалить страницу.</p>
+                <p><strong>Как защититься:</strong> НИКОГДА не отправляй личные фото незнакомцам, даже если они кажутся дружелюбными. Если тебя шантажируют — немедленно обратись к родителям и в полицию. Не плати деньги — шантажисты не остановятся.</p>
+            </div>
+
+            <div class="threat-card">
+                <h3>QR-коды с вредоносным ПО</h3>
+                <p>На остановках, в метро, в туалетах торговых центров появляются QR-коды с обещанием скидок, призов или бесплатного WiFi. При сканировании скачивается приложение с вирусом, которое крадёт данные карт, пароли и доступ к банковским приложениям.</p>
+                <p><strong>Как защититься:</strong> Сканируй QR-коды только из проверенных источников. Перед установкой любого приложения читай, какие разрешения оно запрашивает. Если приложение для скидок требует доступ к СМС — это подозрительно.</p>
+            </div>
+
+            <div class="threat-card">
+                <h3>Пирамиды и схемы "лёгкого заработка"</h3>
+                <p>Предлагают заработать деньги за простые действия: лайки, регистрации, просмотр видео. Сначала действительно платят небольшие суммы, чтобы войти в доверие. Потом просят внести "депозит" для повышения уровня, купить "обучающий курс" или привлечь друзей. После внесения денег исчезают.</p>
+                <p><strong>Как защититься:</strong> Если обещают лёгкие большие деньги — это обман. Настоящая работа требует времени и усилий. Проверь компанию в интернете — обычно про такие схемы уже есть предупреждения.</p>
+            </div>
+
+            <div class="threat-card">
+                <h3>Фейковые инвестиционные платформы</h3>
+                <p>В рекламе или от "успешных инвесторов" в соцсетях предлагают инвестировать в криптовалюту, акции или другие активы с гарантированной прибылью 50-200% в месяц. Показывают поддельную статистику роста и отзывы. После внесения денег на платформу вывести их невозможно.</p>
+                <p><strong>Как защититься:</strong> Гарантированной прибыли не существует — это первый признак мошенничества. Любые инвестиции несут риски. Если не разбираешься в теме — не вкладывай деньги.</p>
+            </div>
+
+            <div class="threat-card">
+                <h3>Поддельная техподдержка</h3>
+                <p>Ищешь в Google номер техподдержки какого-то сервиса, звонишь, а попадаешь к мошенникам. Они просят предоставить удалённый доступ к компьютеру "для диагностики" или сообщить данные аккаунта. Получив доступ, устанавливают вирусы или крадут данные.</p>
+                <p><strong>Как защититься:</strong> Номера техподдержки ищи только на официальных сайтах компаний. Никогда не давай удалённый доступ к компьютеру незнакомцам.</p>
+            </div>
+        </div>
+
+        <div class="alert" style="margin-top: 2rem;">
+            <p><strong>Что делать, если тебя обманули:</strong></p>
+            <p>1. Немедленно расскажи родителям — чем быстрее, тем больше шансов вернуть деньги<br>
+            2. Заблокируй карту через приложение банка или по телефону горячей линии<br>
+            3. Смени все пароли от аккаунтов<br>
+            4. Сохрани всю переписку с мошенниками как доказательство<br>
+            5. Обратись в банк для оспаривания транзакции<br>
+            6. Подай заявление в полицию<br>
+            7. Сообщи о мошенниках в службу поддержки того сервиса, где произошёл обман</p>
+        </div>
+    </section>
+
+    <section id="quiz">
+        <h2>Проверь свои знания</h2>
+
+        <div class="quiz-wrapper">
+            <div class="progress">
+                <div class="progress-bar" id="quizProgress"></div>
+            </div>
+
+            <div class="question-box active" data-q="1">
+                <h3>Тебе пришло СМС якобы от банка: "Попытка списания 15000₽. Для отмены перейдите по ссылке и подтвердите операцию". Что делать?</h3>
+                <div class="answers">
+                    <div class="answer" data-correct="false">Быстро перейти по ссылке и отменить операцию</div>
+                    <div class="answer" data-correct="true">Позвонить в банк по номеру с официального сайта или карты</div>
+                    <div class="answer" data-correct="false">Ввести данные карты на сайте из СМС</div>
+                    <div class="answer" data-correct="false">Написать в СМС свой код подтверждения</div>
+                </div>
+            </div>
+
+            <div class="question-box" data-q="2">
+                <h3>Какой из этих паролей наиболее безопасный для важного аккаунта?</h3>
+                <div class="answers">
+                    <div class="answer" data-correct="false">Qwerty123</div>
+                    <div class="answer" data-correct="false">Дата рождения (01012010)</div>
+                    <div class="answer" data-correct="true">mK9$pL2#xR4nF7@vB</div>
+                    <div class="answer" data-correct="false">Имя твоей собаки с восклицательным знаком</div>
+                </div>
+            </div>
+
+            <div class="question-box" data-q="3">
+                <h3>Тебе написал "друг" в ВК с просьбой срочно занять 3000 рублей. Пишет, что телефон украли и нужно купить новый. Как поступить?</h3>
+                <div class="answers">
+                    <div class="answer" data-correct="false">Сразу перевести — друг же просит</div>
+                    <div class="answer" data-correct="true">Позвонить другу на номер, который ты знаешь, и уточнить</div>
+                    <div class="answer" data-correct="false">Попросить реквизиты карты в переписке ВК</div>
+                    <div class="answer" data-correct="false">Перевести половину для начала</div>
+                </div>
+            </div>
+
+            <div class="question-box" data-q="4">
+                <h3>На что в первую очередь обращать внимание при покупках в незнакомом интернет-магазине?</h3>
+                <div class="answers">
+                    <div class="answer" data-correct="false">Только на низкую цену товара</div>
+                    <div class="answer" data-correct="true">На HTTPS в адресе, реальные отзывы покупателей, наличие контактов компании</div>
+                    <div class="answer" data-correct="false">На красивый дизайн сайта</div>
+                    <div class="answer" data-correct="false">На наличие множества рекламных баннеров</div>
+                </div>
+            </div>
+
+            <div class="question-box" data-q="5">
+                <h3>Что такое двухфакторная аутентификация и зачем она нужна?</h3>
+                <div class="answers">
+                    <div class="answer" data-correct="false">Это когда используешь два разных пароля</div>
+                    <div class="answer" data-correct="true">Дополнительный код подтверждения (СМС или приложение) после ввода пароля для защиты</div>
+                    <div class="answer" data-correct="false">Вход в аккаунт с двух устройств одновременно</div>
+                    <div class="answer" data-correct="false">Проверка личности через email и телефон</div>
+                </div>
+            </div>
+
+            <div class="question-box" data-q="6">
+                <h3>В Instagram тебе пишет блогер и предлагает лёгкий заработок: 30000₽ в месяц за лайки. Но сначала нужно пройти "обучение" за 2500₽. Твои действия?</h3>
+                <div class="answers">
+                    <div class="answer" data-correct="false">Оплатить обучение — потом отобьётся</div>
+                    <div class="answer" data-correct="true">Проигнорировать — это классическая схема обмана</div>
+                    <div class="answer" data-correct="false">Согласиться, но попросить скидку</div>
+                    <div class="answer" data-correct="false">Попросить гарантии возврата денег</div>
+                </div>
+            </div>
+
+            <div class="question-box" data-q="7">
+                <h3>Какую информацию опасно публиковать в открытых постах соцсетей?</h3>
+                <div class="answers">
+                    <div class="answer" data-correct="false">Фотографии еды из кафе</div>
+                    <div class="answer" data-correct="true">Номер школы, точный адрес дома, расписание дня, номер телефона</div>
+                    <div class="answer" data-correct="false">Музыку, которую слушаешь</div>
+                    <div class="answer" data-correct="false">Фото с друзьями без геолокации</div>
+                </div>
+            </div>
+
+            <div class="question-box" data-q="8">
+                <h3>Как отличить настоящее письмо от компании от фишингового?</h3>
+                <div class="answers">
+                    <div class="answer" data-correct="false">По наличию логотипа компании</div>
+                    <div class="answer" data-correct="true">По адресу отправителя, отсутствию ошибок, отсутствию угроз и давления</div>
+                    <div class="answer" data-correct="false">По красивому HTML-оформлению</div>
+                    <div class="answer" data-correct="false">По длине текста письма</div>
+                </div>
+            </div>
+
+            <div class="question-box" data-q="9">
+                <h3>Ты подключился к бесплатному Wi-Fi в кафе. Что из этого делать НЕЛЬЗЯ?</h3>
+                <div class="answers">
+                    <div class="answer" data-correct="false">Смотреть видео на YouTube</div>
+                    <div class="answer" data-correct="true">Заходить в банковское приложение и делать переводы</div>
+                    <div class="answer" data-correct="false">Читать новости</div>
+                    <div class="answer" data-correct="false">Слушать музыку в Spotify</div>
+                </div>
+            </div>
+
+            <div class="question-box" data-q="10">
+                <h3>Нашёл QR-код, наклеенный на столбе с текстом "Отсканируй и получи 1000₽". Что делать?</h3>
+                <div class="answers">
+                    <div class="answer" data-correct="false">Быстро отсканировать — вдруг правда дают деньги</div>
+                    <div class="answer" data-correct="true">Не сканировать — это может быть вирус или мошенническая ссылка</div>
+                    <div class="answer" data-correct="false">Отсканировать на старом телефоне для проверки</div>
+                    <div class="answer" data-correct="false">Сфотографировать и спросить друзей</div>
+                </div>
+            </div>
+
+            <div class="quiz-controls">
+                <button class="btn btn-secondary" id="prevButton" onclick="prevQuestion()">← Назад</button>
+                <button class="btn" id="nextButton" onclick="nextQuestion()">Далее →</button>
+                <button class="btn" id="finishButton" onclick="finishQuiz()" style="display: none;">Завершить</button>
+            </div>
+
+            <div class="results">
+                <div class="score" id="finalScore"></div>
+                <p id="resultText"></p>
+                <button class="btn" onclick="resetQuiz()">Пройти заново</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="sources">
+        <h2>Проверенные источники</h2>
+
+        <div class="resources-grid">
+            <div class="resource">
+                <h3>Госуслуги</h3>
+                <p>Официальная информация о защите персональных данных, цифровой безопасности и работе с государственными сервисами</p>
+                <a href="https://www.gosuslugi.ru/help/faq/login/1" target="_blank">Перейти на сайт →</a>
+            </div>
+
+            <div class="resource">
+                <h3>Центральный Банк РФ</h3>
+                <p>Раздел финансовой грамотности с информацией о защите от мошенников, безопасных платежах и правах потребителей</p>
+                <a href="https://cbr.ru/finprosvet/" target="_blank">Перейти на сайт →</a>
+            </div>
+
+            <div class="resource">
+                <h3>Роскомнадзор</h3>
+                <p>Рекомендации по защите персональных данных в интернете и ответственность за их утечку</p>
+                <a href="https://rkn.gov.ru/personal-data/" target="_blank">Перейти на сайт →</a>
+            </div>
+
+            <div class="resource">
+                <h3>Лига безопасного интернета</h3>
+                <p>Образовательные материалы для подростков, родителей и учителей о кибербезопасности</p>
+                <a href="https://ligainternet.ru/" target="_blank">Перейти на сайт →</a>
+            </div>
+
+            <div class="resource">
+                <h3>Сбербанк — Кибербезопасность</h3>
+                <p>Практические советы по защите банковских данных, распознаванию мошенничества и безопасным онлайн-платежам</p>
+                <a href="https://www.sberbank.ru/ru/person/cyber_security" target="_blank">Перейти на сайт →</a>
+            </div>
+
+            <div class="resource">
+                <h3>Лаборатория Касперского</h3>
+                <p>Образовательная программа "Kaspersky Kids" для подростков с курсами по кибербезопасности</p>
+                <a href="https://kids.kaspersky.ru/" target="_blank">Перейти на сайт →</a>
+            </div>
+
+            <div class="resource">
+                <h3>МВД России</h3>
+                <p>Официальные памятки и предупреждения о новых схемах интернет-мошенничества</p>
+                <a href="https://мвд.рф" target="_blank">Перейти на сайт →</a>
+            </div>
+
+            <div class="resource">
+                <h3>Яндекс.Безопасность</h3>
+                <p>Советы по защите аккаунтов, настройке двухфакторной аутентификации и безопасному использованию сервисов</p>
+                <a href="https://yandex.ru/support/passport/" target="_blank">Перейти на сайт →</a>
+            </div>
+        </div>
+
+        <div class="tip" style="margin-top: 3rem;">
+            <p><strong>📞 Горячие линии:</strong><br><br>
+            <strong>Линия помощи "Дети онлайн"</strong> — 8-800-25-000-15 (звонок бесплатный)<br>
+            Помощь детям и подросткам, столкнувшимся с проблемами в интернете<br><br>
+            <strong>ЦБ РФ по вопросам финансового мошенничества</strong> — 8-800-300-30-00<br><br>
+            <strong>Полиция</strong> — 102 или 112</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>растяпа.нет — образовательный проект для подростков 12-17 лет</p>
+        <p style="margin-top: 0.5rem;">Будь внимателен, защищай свои данные, не доверяй незнакомцам</p>
+    </footer>
+
+    <script>
+        let currentQ = 1;
+        const totalQ = 10;
+        let userAnswers = {};
+        let finalScore = 0;
+
+        function updateProgressBar() {
+            const progress = (currentQ / totalQ) * 100;
+            document.getElementById('quizProgress').style.width = progress + '%';
+        }
+
+        function showQuestion(num) {
+            document.querySelectorAll('.question-box').forEach(q => q.classList.remove('active'));
+            document.querySelector(`.question-box[data-q="${num}"]`).classList.add('active');
+            
+            document.getElementById('prevButton').style.display = num === 1 ? 'none' : 'block';
+            
+            if (num === totalQ) {
+                document.getElementById('nextButton').style.display = 'none';
+                document.getElementById('finishButton').style.display = 'block';
+            } else {
+                document.getElementById('nextButton').style.display = 'block';
+                document.getElementById('finishButton').style.display = 'none';
+            }
+            
+            updateProgressBar();
+        }
+
+        function nextQuestion() {
+            if (currentQ < totalQ) {
+                currentQ++;
+                showQuestion(currentQ);
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQ > 1) {
+                currentQ--;
+                showQuestion(currentQ);
+            }
+        }
+
+        document.querySelectorAll('.answer').forEach(ans => {
+            ans.addEventListener('click', function() {
+                const questionBox = this.closest('.question-box');
+                const qNum = questionBox.dataset.q;
+                
+                questionBox.querySelectorAll('.answer').forEach(a => a.classList.remove('selected'));
+                this.classList.add('selected');
+                
+                userAnswers[qNum] = this.dataset.correct === 'true';
+            });
+        });
+
+        function finishQuiz() {
+            finalScore = 0;
+            
+            document.querySelectorAll('.question-box').forEach(qBox => {
+                const qNum = qBox.dataset.q;
+                qBox.querySelectorAll('.answer').forEach(ans => {
+                    if (ans.dataset.correct === 'true') {
+                        ans.classList.add('correct');
+                    } else if (ans.classList.contains('selected')) {
+                        ans.classList.add('wrong');
+                    }
+                    ans.style.pointerEvents = 'none';
+                });
+                
+                if (userAnswers[qNum] === true) {
+                    finalScore++;
+                }
+            });
+            
+            showResults();
+        }
+
+        function showResults() {
+            const percent = (finalScore / totalQ * 100).toFixed(0);
+            document.querySelector('.question-box.active').classList.remove('active');
+            document.querySelector('.quiz-controls').style.display = 'none';
+            document.querySelector('.results').classList.add('show');
+            
+            document.getElementById('finalScore').textContent = finalScore + ' / ' + totalQ;
+            
+            let msg = '';
+            if (percent >= 90) {
+                msg = 'Отлично! Ты действительно разбираешься в кибербезопасности. Продолжай быть внимательным в сети.';
+            } else if (percent >= 70) {
+                msg = 'Хороший результат! Базовые знания у тебя есть, но есть моменты, которые стоит повторить.';
+            } else if (percent >= 50) {
+                msg = 'Средний уровень. Рекомендую перечитать теорию и обратить внимание на ошибки.';
+            } else {
+                msg = 'Тебе определённо нужно изучить основы кибербезопасности. Это важно для защиты твоих данных и денег!';
+            }
+            
+            document.getElementById('resultText').textContent = msg;
+        }
+
+        function resetQuiz() {
+            currentQ = 1;
+            userAnswers = {};
+            finalScore = 0;
+            
+            document.querySelectorAll('.answer').forEach(ans => {
+                ans.classList.remove('selected', 'correct', 'wrong');
+                ans.style.pointerEvents = 'auto';
+            });
+            
+            document.querySelector('.results').classList.remove('show');
+            document.querySelector('.quiz-controls').style.display = 'flex';
+            document.getElementById('nextButton').style.display = 'block';
+            document.getElementById('finishButton').style.display = 'none';
+            
+            showQuestion(1);
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        updateProgressBar();
+    </script>
+</body>
+</html>
